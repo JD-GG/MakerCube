@@ -2,12 +2,13 @@
  
 ## What is MakerCube?
 
+The Goal of this Project is to create a fun and intuitive way to learn programming and encourage thinking in 3D-Space with code. Contained in this project is the buildable cube with LEDs and simple IO oppertunities. In addition to build instructions exists a library that makes it very simple to interact with the hardware used.
 ### The sides of the Cube:
 
 The sides of the Cube contain, similar to a rubik's cube a 3x3 field, with each a LED in it. 
 In total there are 36 LEDs which can be controlled by:
 
-### the top of the Cube:
+### The top of the Cube:
 
 The top of the Cube contains various input possiblitys, which can be used to control the LEDs on the side. As input you can use
 - button
@@ -19,7 +20,7 @@ And you can also control a 7 Segment Display, which will be placed on the topsid
 
 On the top will be a dataport, which can be used to upload sketches from the Arduino IDE to the esp.
 
-### the bottom side of the Cube:
+### The bottom side of the Cube:
 
 On the bottom is a switch, to power the esp and the LEDs and a loading port, to charge the battery.
 
@@ -27,14 +28,15 @@ On the bottom is a switch, to power the esp and the LEDs and a loading port, to 
 
 ### esp8266
 
-As a microcontroller we use a esp8226. 
-To access it you need the CH340 drivers. 
+As a microcontroller we use a esp8226 LOLIN(WEMOS) D1 R2 & mini compatible board. 
+To access it you need the CH340 driver. 
 To controller / programm it in the Arduino IDE you need to add a additional board manager. You do this with adding "http://arduino.esp8266.com/stable/package\_esp8266com\_index.json" into File -> Preferences -> Additional boards manager URLs.
-As board you have to choose "LOLIN(WEMOS) D1 R2 & mini".
+As board you have to choose "LOLIN(WEMOS) D1 R2 & mini".  
+PIO also works of course.
 
 ### neopixels
 
-As LEDs we use BTF-LIGHTING WS2812 WS2812B LED stripes.
+As LEDs we use WS2812 LED stripes.
 To control the LEDs you need to install the "NeoPixelBus by Makuna", which is a fork from the adafruit neopixels repository on github.
 Default code to display colors:
 
