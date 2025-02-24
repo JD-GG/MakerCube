@@ -23,7 +23,7 @@ RgbColor violet(colorSaturation / 2, 0, colorSaturation); // Violett (Mehr Blau 
 RgbColor white(colorSaturation);
 RgbColor black(0,0,0);
 
-#define DELAYVAL 20
+#define DELAYVAL 2000
 
 NeoPixelBus<NeoGrbFeature, NeoEsp8266Uart1800KbpsMethod> strip(PixelCount,PixelPin);
 
@@ -46,12 +46,16 @@ void loop() {
 
   int numColors = sizeof(colors) / sizeof(colors[0]); // Anzahl der Farben
 
-  for (int i = 0; i < numColors; i++) { 
+  for (int i = 0; i < (numColors-1); i++) { 
     for (int j = 0; j < PixelCount; j++) { // LEDs nacheinander leuchten lassen
-      clear(); // Vorherige LEDs ausschalten
-      strip.SetPixelColor(j, colors[i]);  
-      strip.Show();
-      delay(DELAYVAL);
+        //clear(); // Vorherige LEDs ausschalten
+        if(j%2==0)
+            strip.SetPixelColor(j, colors[i]); 
+        else
+            strip.SetPixelColor(j, colors[i+1]); 
+
     }
+    strip.Show();
+    delay(DELAYVAL);
   }
 }
