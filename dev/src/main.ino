@@ -7,5 +7,5 @@ void setup(){
 }
 
 void loop() {
-    alunFunc();
+    setLight('N', 0, C.white);
 }
