@@ -15,6 +15,5 @@ int calcLedSouth(int gridNum);
 int calcLedWest(int gridNum);
 void setLight(char direction, int ledNum, RgbColor color);
 void alunFunc();
-
-
+    
 #endif
