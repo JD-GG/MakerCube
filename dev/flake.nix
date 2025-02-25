@@ -13,14 +13,14 @@
             devShells.x86_64-linux.default = pkgs.mkShell {
                 buildInputs = [
                     pkgs.platformio
+                    pkgs.clang_19
+                    pkgs.clang-tools
                 ];
 
                 # Generate platformio.ini and install libraries
                 shellHook = ''
             echo "Setting up PlatformIO environment..."
 
-
-            # Install libraries specified in platformio.ini
             pio pkg install
             '';
             };
