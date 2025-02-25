@@ -1,2 +1,5 @@
 /dev/.pio
 .vscode
+dev/.cache/
+dev/compile_commands.json
+dev/include/Arduino.h
