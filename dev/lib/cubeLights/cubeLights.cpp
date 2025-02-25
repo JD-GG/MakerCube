@@ -111,7 +111,3 @@ void setLight(char direction, int ledNum, RgbColor color) {//Din A4 Dokumentatio
     strip.SetPixelColor(ledInArr, color); 
     strip.Show();
 }
-
-/*
-
-*/
