@@ -1,10 +1,9 @@
 #include <cubeLights.h>
 
 const uint16_t PixelCount= 36;
-
+const int colorSaturation = 64;
 
 NeoPixelBus<NeoGrbFeature, NeoEsp8266Uart1800KbpsMethod> strip(PixelCount,2);
-const int colorSaturation = 64;
 RgbColor red(colorSaturation, 0, 0);
 RgbColor green(0, colorSaturation, 0);
 RgbColor blue(0, 0, colorSaturation);
@@ -46,16 +45,35 @@ int calcLedNord(int gridNum){
 }
 
 int calcLedOst(int gridNum){
-    if(gridNum == 8)
-        return 35;
-    else
-        return calcLedSouth(gridNum) - 3;
+    int result = 0;
+    switch(gridNum){
+        case 0: result = 3; break;
+        case 1: result = 2; break;
+        case 2: result = 1; break;
+        case 3: result = 14; break;
+        case 4: result = 13; break;
+        case 5: result = 12; break;
+        case 6: result = 25; break;
+        case 7: result = 24; break;
+        case 8: result = 35; break;
+    }
+    return result;
 }
-    strip.ClearTo(black);
-    delay(2000);
 
 int calcLedSouth(int gridNum){
-    return calcLedWest(gridNum) - 3;
+    int result = 0;
+    switch(gridNum){
+        case 0: result = 6; break;
+        case 1: result = 5; break;
+        case 2: result = 4; break;
+        case 3: result = 17; break;
+        case 4: result = 16; break;
+        case 5: result = 15; break;
+        case 6: result = 28; break;
+        case 7: result = 27; break;
+        case 8: result = 26; break;
+    }
+    return result;
 }
 
 int calcLedWest(int gridNum){
@@ -93,26 +111,3 @@ void setLight(char direction, int ledNum, RgbColor color) {//Din A4 Dokumentatio
     strip.SetPixelColor(ledInArr, color); 
     strip.Show();
 }
-
-/*
-void alunFunc(){
-    RgbColor colors[] = { red, blue, green, yellow, cyan, magenta, 
-                        orange, pink, lime, turquoise, violet, 
-                        white, black };
-
-  int numColors = sizeof(colors) / sizeof(colors[0]); // Anzahl der Farben
-
-  for (int i = 0; i < (numColors-1); i++) { 
-    for (int j = 0; j < PixelCount; j++) { // LEDs nacheinander leuchten lassen
-        //clear(); // Vorherige LEDs ausschalten
-        if(j%2==0)
-            strip.SetPixelColor(j, colors[i]); 
-        else
-            strip.SetPixelColor(j, colors[i+1]); 
-    }
-    strip.Show();
-    delay(2000);
-    
-  }
-}
-*/
