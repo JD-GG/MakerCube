@@ -12,6 +12,7 @@
         in {
             devShells.x86_64-linux.default = pkgs.mkShell {
                 buildInputs = [
+                    pkgs.clang-tools          # Example: LSP for C/C++ (clangd)
                     pkgs.platformio
                 ];
 
