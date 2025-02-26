@@ -14,14 +14,14 @@
                 buildInputs = [
                     pkgs.clang-tools          # Example: LSP for C/C++ (clangd)
                     pkgs.platformio
+                    pkgs.clang_19
+                    pkgs.clang-tools
                 ];
 
                 # Generate platformio.ini and install libraries
                 shellHook = ''
             echo "Setting up PlatformIO environment..."
 
-
-            # Install libraries specified in platformio.ini
             pio pkg install
             '';
             };
