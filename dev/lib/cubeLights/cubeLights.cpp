@@ -1,7 +1,7 @@
 #include <cubeLights.h>
 
 const uint16_t PixelCount= 36;
-const int colorSaturation = 64;
+uint8_t colorSaturation = 64;
 
 NeoPixelBus<NeoGrbFeature, NeoEsp8266Uart1800KbpsMethod> strip(PixelCount,2);
 RgbColor red(colorSaturation, 0, 0);
@@ -96,18 +96,27 @@ void setLight(char direction, int ledNum, RgbColor color) {//Din A4 Dokumentatio
     int ledInArr = 0;
     switch(direction){
         case 'N': 
+        case 0:
             ledInArr =  calcLedNord(ledNum);
             break;
         case 'O':
+        case 1:
             ledInArr = calcLedOst(ledNum);
             break;
         case 'S':
+        case 2:
             ledInArr = calcLedSouth(ledNum);
             break;
         case 'W':
+        case 3:
             ledInArr = calcLedWest(ledNum);
             break;
     }
     strip.SetPixelColor(ledInArr, color); 
     strip.Show();
 }
+
+void setBrightness(uint8_t value){
+    colorSaturation = value;
+}
+

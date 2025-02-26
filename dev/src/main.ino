@@ -5,7 +5,13 @@
 void setup(){
     MclSetup();
     setLight('W', 7, green);
+    setLight(3, 5, cyan);
+    setLight(3, 4, pink);
 }
 
 void loop() {
+}
+
+void callbackUp(){
+    
 }
