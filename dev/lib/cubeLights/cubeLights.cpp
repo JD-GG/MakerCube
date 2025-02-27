@@ -23,8 +23,9 @@ void MclSetup() {
     strip.Begin();
 }
 
-void allWhite() {
-    strip.ClearTo(white);
+void setAll(RgbColor color){
+    strip.ClearTo(color);
+    strip.Show();
 }
 
 int calcLedNord(int gridNum){
@@ -92,7 +93,7 @@ int calcLedWest(int gridNum){
     return result;
 }
 
-void setLight(char direction, int ledNum, RgbColor color) {//Din A4 Dokumentation mit LED nummerierung
+int calcLedInArr(char direction, int ledNum){
     int ledInArr = 0;
     switch(direction){
         case 'N': 
@@ -112,11 +113,60 @@ void setLight(char direction, int ledNum, RgbColor color) {//Din A4 Dokumentatio
             ledInArr = calcLedWest(ledNum);
             break;
     }
+    return ledInArr;
+}
+
+void setLight(char direction, int ledNum, RgbColor color) {//Din A4 Dokumentation mit LED nummerierung
+    int ledInArr = calcLedInArr(direction, ledNum);
     strip.SetPixelColor(ledInArr, color); 
     strip.Show();
 }
 
-void setBrightness(uint8_t value){
-    colorSaturation = value;
+RgbColor getLight(char direction, int ledNum){
+    int ledInArr = calcLedInArr(direction, ledNum);
+    return strip.GetPixelColor(ledInArr);
 }
 
+
+
+void Player::decrementSide(){
+    side--;
+    if(side < 0)
+        side = 3;
+}
+void Player::incrementSide(){
+    side++;
+    if(side > 3)
+        side = 0;
+}
+void Player::drawPLayer(){
+    setLight(side, ledNum, color);
+}
+Player::Player(char playerName, int side, int ledNum, RgbColor color)
+: name(playerName), side(side), ledNum(ledNum), color(color) {
+    setLight(side, ledNum, color);
+}
+void Player::moveRight(){
+    strip.SetPixelColor(calcLedInArr(side, ledNum), black);//Clear previous position
+
+    if((ledNum+1)%3 == 0){//Right Border
+        decrementSide();
+        ledNum = ledNum - 2;
+    }
+    else{
+        ledNum++;
+    }
+    drawPLayer();
+}
+void Player::moveLeft(){
+    strip.SetPixelColor(calcLedInArr(side, ledNum), black);
+
+    if((ledNum+3)%3 == 0){//Left Border
+        incrementSide();
+        ledNum = ledNum + 2;
+    }
+    else{
+        ledNum--;
+    }
+    drawPLayer();
+}
