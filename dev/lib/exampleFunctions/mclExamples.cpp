@@ -25,8 +25,7 @@ void alunFunc(){
     int numColors = sizeof(colors) / sizeof(colors[0]); // Anzahl der Farben
 
     for (int i = 0; i < (numColors-1); i++) { 
-        for (int j = 0; j < 36; j++) { // LEDs nacheinander leuchten lassen
-            //clear(); // Vorherige LEDs ausschalten
+        for (int j = 0; j < 36; j++) { 
             if(j%2==0)
                 strip.SetPixelColor(j, colors[i]); 
             else
