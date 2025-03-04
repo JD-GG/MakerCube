@@ -27,6 +27,8 @@ class Player{
         Player(char playerName, int side, int ledNum, RgbColor color);
         void moveRight();
         void moveLeft();
+        void moveUp();
+        void moveDown();
         int getSide(){
             return side;
         }
