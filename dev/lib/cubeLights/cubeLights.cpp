@@ -21,6 +21,7 @@ RgbColor white(colorSaturation);
 void MclSetup() {
     //pinMode(_pin, OUTPUT);??
     strip.Begin();
+    setAll(black);
 }
 
 void setAll(RgbColor color){
