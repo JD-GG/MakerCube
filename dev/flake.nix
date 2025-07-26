@@ -19,6 +19,7 @@
                 ];
 
                 # Generate platformio.ini and install libraries
+                # If pio has sudo problems "rm -rf" the /.pio folder then "nix develop" again
                 shellHook = ''
             echo "Setting up PlatformIO environment..."
 
