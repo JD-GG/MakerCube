@@ -11,13 +11,9 @@ Player d('a', 0, 0, cyan);//And this is called direct initialization. Both work 
 RgbColor pureWhite = RgbColor(255,255,255);
 RgbColor myColor(1,1,1);
 
-const char* ssid = "Obi LAN Kenobi";
-const char* password = "IHaveTheHighGround";
-
 void generalCallback(Control* sender, int type) {
     Serial.printf("Type: %d\nID: %d\n", type, sender->id);
 }
-
 void buttonCallback(Control* sender, int type)
 {
     switch (type)
@@ -37,22 +33,10 @@ void buttonCallback(Control* sender, int type)
 }
 
 void setup(){
-    MclSetup();
-    delay(1000);
-    setAll(black);
-    Serial.begin(115200);
-    WiFi.begin(ssid, password);
-    Serial.print("Connecting to Wi-Fi");
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-    }
-    Serial.println("\nConnected! IP: " + WiFi.localIP().toString());
-
-    ESPUI.setVerbosity(Verbosity::Verbose);
-    ESPUI.button("Push Button", &buttonCallback, ControlColor::Peterriver, "Press");
-    ESPUI.begin("ESPUI Button Example");
-    gameMode = true;
+    // To add elements to a non tabbed GUI use the following syntax. Every attribute can be changed
+    // ESPUI.button("Title", &callBackFunction, ControlColor::Color, "Inscription");
+    ESPUI.button("Push Button", &buttonCallback, ControlColor::Peterriver, "Nothing");
+    MclSetup(true); // Has to be true if ESPUI is being used
 }
 
 void loop() {

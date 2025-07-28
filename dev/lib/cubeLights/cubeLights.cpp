@@ -1,5 +1,8 @@
 #include <cubeLights.h>
 
+const char* spaceSsid = "Obi LAN Kenobi";
+const char* spacePassword = "IHaveTheHighGround";
+
 const uint16_t PixelCount= 36;
 uint8_t colorSaturation = 64;
 bool gameMode = false; // This variable has to be set to true if ESPUI is being used
@@ -19,10 +22,22 @@ RgbColor violet(colorSaturation / 2, 0, colorSaturation); // Violett (Mehr Blau 
 RgbColor black(0,0,0);
 RgbColor white(colorSaturation);
 
-void MclSetup() {
-    //pinMode(_pin, OUTPUT);??
+void MclSetup(bool useEspui) {
+    gameMode = useEspui;
+    Serial.begin(115200);
     strip.Begin();
     setAll(black);
+    if(useEspui){
+        WiFi.begin(SECRET_SSID, SECRET_PASS);
+        Serial.print("Connecting to Wi-Fi");
+        while (WiFi.status() != WL_CONNECTED) {
+            delay(500);
+            Serial.print(".");
+        }
+        Serial.println("\nConnected! IP: " + WiFi.localIP().toString());
+        ESPUI.setVerbosity(Verbosity::Verbose);
+        ESPUI.begin("ESPUI Button Example");
+    }
 }
 
 void MclLoop(){
