@@ -2,6 +2,7 @@
 
 const uint16_t PixelCount= 36;
 uint8_t colorSaturation = 64;
+bool gameMode = false; // This variable has to be set to true if ESPUI is being used
 
 NeoPixelBus<NeoGrbFeature, NeoEsp8266Uart1800KbpsMethod> strip(PixelCount,2);
 RgbColor red(colorSaturation, 0, 0);
@@ -24,9 +25,24 @@ void MclSetup() {
     setAll(black);
 }
 
+void MclLoop(){
+    if(gameMode == false){
+        return;
+    }
+    unsigned long beginFrameTime = millis();
+    if(strip.IsDirty()){
+        strip.Show();
+    }
+    while(millis() < beginFrameTime + 33){ // 30fps ~ 33ms per frame
+        ; // Chill here during frame
+    }
+}
+
 void setAll(RgbColor color){
     strip.ClearTo(color);
-    strip.Show();
+    if(gameMode == false){
+        strip.Show();
+    }
 }
 
 int calcLedNord(int gridNum){
@@ -120,7 +136,9 @@ int calcLedInArr(char direction, int ledNum){
 void setLight(char direction, int ledNum, RgbColor color) {//Din A4 Dokumentation mit LED nummerierung
     int ledInArr = calcLedInArr(direction, ledNum);
     strip.SetPixelColor(ledInArr, color); 
-    strip.Show();
+    if(gameMode == false){
+        strip.Show();
+    }
 }
 
 RgbColor getLight(char direction, int ledNum){

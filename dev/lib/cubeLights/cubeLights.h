@@ -7,8 +7,10 @@
 extern RgbColor red,green, blue, yellow, cyan, magenta, orange,pink,lime,turquoise,violet,black,white;
 extern NeoPixelBus<NeoGrbFeature, NeoEsp8266Uart1800KbpsMethod> strip;
 extern uint8_t colorSaturation;
+extern bool gameMode;
 
 void MclSetup();
+void MclLoop();
 void setAll(RgbColor color);
 void setLight(char direction, int ledNum, RgbColor color);
 RgbColor getLight(char direction, int ledNum);
